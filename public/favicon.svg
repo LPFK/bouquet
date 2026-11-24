@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%">
+      <stop offset="0" stop-color="#2c2c30"/>
+      <stop offset="1" stop-color="#141518"/>
+    </radialGradient>
+    <radialGradient id="rose" cx="44%" cy="38%" r="62%">
+      <stop offset="0" stop-color="#e0303f"/>
+      <stop offset="1" stop-color="#7d0a1c"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- leaves -->
+  <path d="M30 44c-9 1-15-3-17-9 7-2 13 1 17 9z" fill="#4f7f45"/>
+  <path d="M34 44c9 1 15-3 17-9-7-2-13 1-17 9z" fill="#3f6b38"/>
+  <!-- bloom -->
+  <circle cx="32" cy="29" r="15" fill="url(#rose)"/>
+  <!-- petal spiral -->
+  <path d="M32 29.5c0-2.6 3-3.6 4.6-2 1.9 1.9.7 5.6-2.8 6.5-4 1-7.6-1.8-7-6 .6-4.6 5.8-7.1 10.3-5.4 4.4 1.7 6.2 6.9 4.2 11.2"
+        fill="none" stroke="#ff9aa6" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"/>
+</svg>

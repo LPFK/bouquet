@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+*.log
+screenshots/
+
+# the letter in clear text: only the encrypted copy (src/secret/letter.enc.json) is committed
+A_Letter_to_Bibi.txt
