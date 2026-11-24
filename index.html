@@ -4,8 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#141518" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Bouquet</title>
+    <meta
+      name="description"
+      content="Un bouquet de fleurs qui éclot en temps réel dans votre navigateur : roses, tulipes, marguerites et eucalyptus, à faire refleurir d’un geste."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Share previews. __SITE_URL__ is filled in at build time (vite.config.ts, SITE_URL). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Bouquet" />
+    <meta property="og:description" content="Un bouquet de fleurs qui éclot en temps réel. Cliquez pour en faire éclore un nouveau." />
+    <meta property="og:url" content="__SITE_URL__" />
+    <meta property="og:image" content="__SITE_URL__og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Un bouquet de roses rouges, tulipes roses et marguerites dans un papier kraft" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="app" aria-label="Rendu animé d'un bouquet de fleurs" role="img"></div>

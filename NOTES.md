@@ -214,7 +214,7 @@ mapping + sRGB), then grain/vignette in display space.
 - [x] Merge petals per flower (BufferGeometryUtils.mergeGeometries) or InstancedMesh per kind
 - [x] Adaptive quality: drop to `low` if frame time stays above 22 ms
 - [x] Pause rendering when the tab is hidden or the canvas is off-screen
-- [ ] "Share this bouquet" button (copy the URL with its seed and theme)
+- [x] "Share this bouquet" button (native share on phones, else copies seed/theme/solo link)
 - [x] Favicon (`public/favicon.svg`)
-- [ ] Open Graph image, meta description (French)
-- [ ] Deploy as a static site (GitHub Pages / Netlify / Vercel); `base: './'` is already set
+- [x] Open Graph image (`public/og.jpg`, render of seed 7 at 1200x630), meta description (French)
+- [x] Deploy on GitHub Pages (`.github/workflows/deploy.yml`, every push to main)

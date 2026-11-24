@@ -16,6 +16,13 @@ stored encrypted (`src/secret/letter.enc.json`); the plain text is not part of t
 To change the letter, edit the local `A_Letter_to_Bibi.txt` and run
 `node scripts/encrypt-letter.mjs` (it asks for the password; nothing stores it).
 
+## Deploy
+
+The site is published on GitHub Pages by `.github/workflows/deploy.yml` at every push to
+`main`. One-time setup in the GitHub repository: Settings > Pages > Build and deployment >
+Source: **GitHub Actions**. The workflow sets `SITE_URL` so share previews (`og:image`)
+use absolute URLs.
+
 See `NOTES.md` for architecture, conventions and roadmap.
 
 ---

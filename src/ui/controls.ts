@@ -23,6 +23,31 @@ export interface ControlsHandlers {
   onSecret(): void;
 }
 
+/** Share the current view: native share sheet on phones, else copy the link. */
+async function share(hint: (text: string) => void) {
+  // only what defines the bouquet; testing params (quality, debug, still) stay behind
+  const params = new URLSearchParams(location.search);
+  const keep = new URLSearchParams();
+  for (const key of ['seed', 'theme', 'solo']) {
+    const v = params.get(key);
+    if (v) keep.set(key, v);
+  }
+  const url = `${location.origin}${location.pathname}?${keep.toString()}`;
+  const data = { title: 'Bouquet', text: 'Un bouquet pour toi', url };
+  try {
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+      await navigator.share(data);
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+    hint('Lien copié : ce bouquet exact s’ouvrira chez la personne qui le reçoit');
+  } catch (e) {
+    // the share sheet was dismissed: nothing to say
+    if (e instanceof DOMException && e.name === 'AbortError') return;
+    hint('Copiez le lien depuis la barre d’adresse pour partager ce bouquet');
+  }
+}
+
 export interface Controls {
   setState(state: ControlsState): void;
   /** show a short message above the bar for a few seconds */
@@ -46,6 +71,7 @@ const ICONS = {
   ),
   bud: svg('<path d="M12 3.5c3 2.6 3.4 6.2 0 9.3-3.4-3.1-3-6.7 0-9.3z"/><path d="M9.3 11.3L12 14l2.7-2.7"/><path d="M12 14v7"/>'),
   lock: svg('<rect x="5.5" y="10.5" width="13" height="9.5" rx="2.4"/><path d="M8.6 10.5V8a3.4 3.4 0 0 1 6.8 0v2.5"/>'),
+  share: svg('<circle cx="17.5" cy="5.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="M8.7 10.8l6.6-4M8.7 13.2l6.6 4"/>'),
   heart: svg('<path d="M12 19.5s-7-4.3-7-9.4A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.1c0 5.1-7 9.4-7 9.4z"/>'),
 };
 
@@ -89,10 +115,11 @@ export function createControls(handlers: ControlsHandlers): Controls {
   const soloBtns = SOLO.map(({ kind, label }) => button(label, ICONS[kind], () => handlers.onSolo(kind)));
   const themeBtn = button('Thème', '', handlers.onTheme);
   themeBtn.classList.add('ctl-theme');
+  const shareBtn = button('Partager ce bouquet', ICONS.share, () => void share(showHint));
   const secretBtn = button('Secret', ICONS.lock, handlers.onSecret);
   secretBtn.classList.add('ctl-secret');
 
-  bar.append(newBtn, bouquetBtn, separator(), ...soloBtns, separator(), themeBtn, secretBtn);
+  bar.append(newBtn, bouquetBtn, separator(), ...soloBtns, separator(), themeBtn, shareBtn, secretBtn);
   document.body.appendChild(bar);
 
   const hint = document.createElement('p');
